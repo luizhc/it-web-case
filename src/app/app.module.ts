@@ -1,20 +1,20 @@
 import { NgModule } from '@angular/core';
+import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore/';
 import { BrowserModule } from '@angular/platform-browser';
-import { getAnalytics } from 'firebase/analytics';
-import { initializeApp } from 'firebase/app';
 import { AppRoutingModule } from './app-routing.module';
 
 import { environment } from './../environments/environment';
 import { AppComponent } from './app.component';
 
-// Initialize Firebase
-const firebaseApp = initializeApp(environment.firebaseConfig);
-export const analytics = getAnalytics(firebaseApp);
-
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, AngularFirestoreModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
