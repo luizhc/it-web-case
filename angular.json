@@ -72,7 +72,9 @@
               "browserTarget": "it-web-case:build:production"
             },
             "development": {
-              "browserTarget": "it-web-case:build:development"
+              "browserTarget": "it-web-case:build:development",
+              "host": "0.0.0.0",
+              "open": true
             }
           },
           "defaultConfiguration": "development"
