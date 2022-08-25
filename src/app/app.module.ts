@@ -11,6 +11,7 @@ import { localStorageSync } from 'ngrx-store-localstorage';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { CoreModule } from './core/core.module';
 
 const localStorageSyncReducer = (
   reducer: ActionReducer<any>
@@ -28,6 +29,7 @@ const metaReducers: MetaReducer[] = [localStorageSyncReducer];
   imports: [
     BrowserModule,
     AppRoutingModule,
+    CoreModule,
 
     // Firebase
     AngularFireModule.initializeApp(environment.firebaseConfig),
