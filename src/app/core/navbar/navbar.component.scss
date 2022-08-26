@@ -1,21 +1,21 @@
 nav {
-  height: 4.375rem;
+  height: 4rem;
   background-color: var(--primary-color);
-  padding: 3rem;
+  padding: 2.5rem 3rem;
   display: flex;
   align-items: center;
-}
 
-a {
-  font-weight: bold;
-  font-size: 1.5rem;
-  color: var(--light-color);
-  margin-left: 1rem;
-  text-decoration: none;
-}
+  span {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: var(--light-color);
+    margin-left: 1rem;
+    text-decoration: none;
+  }
 
-img {
-  width: 3rem;
-  border-right: 1px solid var(--light-color);
-  padding-right: 1rem;
+  img {
+    width: 3rem;
+    border-right: 1px solid var(--light-color);
+    padding-right: 1rem;
+  }
 }

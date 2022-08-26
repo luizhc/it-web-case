@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore/';
@@ -12,6 +13,8 @@ import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
+import { PagesModule } from './pages/pages.module';
+import { SharedModule } from './shared/shared.module';
 
 const localStorageSyncReducer = (
   reducer: ActionReducer<any>
@@ -28,8 +31,11 @@ const metaReducers: MetaReducer[] = [localStorageSyncReducer];
   declarations: [AppComponent],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     CoreModule,
+    PagesModule,
+    SharedModule,
 
     // Firebase
     AngularFireModule.initializeApp(environment.firebaseConfig),

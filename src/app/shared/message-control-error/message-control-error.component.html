@@ -1,0 +1,10 @@
+<div
+  *ngIf="
+    (control?.hasError(error) && control?.dirty) ||
+    (control?.hasError(error) && control?.touched)
+  "
+>
+  <div class="message-error">
+    {{ msg }}
+  </div>
+</div>

@@ -1,4 +1,8 @@
 <nav>
-  <img src="assets/icons/graph.png" alt="Money" />
-  <a href="/">Gastos Pessoais</a>
+  <img
+    (click)="utilService.navigateByUrl('/')"
+    src="assets/icons/graph.png"
+    alt="Money"
+  />
+  <span (click)="utilService.navigateByUrl('/')">Gastos Pessoais</span>
 </nav>

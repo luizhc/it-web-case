@@ -7,8 +7,18 @@
         tudo em um só lugar...
       </h1>
       <div class="text-center">
-        <button class="home-btn">ACESSAR CATEGORIAS</button>
-        <button class="home-btn">ACESSAR LANÇAMENTOS</button>
+        <button
+          (click)="utilService.navigateByUrl('categorias')"
+          class="home-btn"
+        >
+          ACESSAR CATEGORIAS
+        </button>
+        <button
+          (click)="utilService.navigateByUrl('lancamentos')"
+          class="home-btn"
+        >
+          ACESSAR LANÇAMENTOS
+        </button>
       </div>
     </div>
     <div class="home-image">

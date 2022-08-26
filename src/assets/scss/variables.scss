@@ -8,8 +8,12 @@
   // Forms
   --color-valid: #28a745;
   --color-invalid: #dc3545;
+  --shadow-color-valid: rgba(0, 172, 166, 0.25);
+  --shadow-color-invalid: rgba(220, 53, 70, 0.25);
   --border-valid: 1px solid var(--color-valid);
   --border-invalid: 1px solid var(--color-invalid);
+  --border-focus-valid: 0 0 0 0.2rem var(--shadow-color-valid);
+  --border-focus-invalid: 0 0 0 0.2rem var(--shadow-color-invalid);
 
   // Scrollbar
   --scrollbar-bg: #f5f5f5;
@@ -78,33 +82,16 @@ textarea::placeholder {
   }
 }
 
-input.ng-touched.ng-invalid,
-input.ng-dirty.ng-invalid,
-textarea.ng-touched.ng-invalid,
-textarea.ng-dirty.ng-invalid,
-select.ng-touched.ng-invalid,
-select.ng-dirty.ng-invalid {
-  border-color: var(--color-invalid);
-}
-
-input.ng-touched.ng-valid,
-input.ng-dirty.ng-valid,
-textarea.ng-touched.ng-valid,
-textarea.ng-dirty.ng-valid,
-select.ng-touched.ng-valid,
-select.ng-dirty.ng-valid {
-  border-color: var(--color-valid);
-}
-
 .container {
   padding: 2rem 1rem 4rem;
 }
 
 .card-title {
   text-align: center;
+  color: var(--dark-color);
 
   img {
-    width: 3rem;
+    max-width: 2rem;
   }
 }
 

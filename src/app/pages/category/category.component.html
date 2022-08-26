@@ -1,0 +1,120 @@
+<div class="container col-xs-12 col-sm-12 col-md-8 col-xl-7">
+  <div class="shadow-lg p-4 mb-5 bg-white rounded">
+    <button
+      (click)="utilService.navigateByUrl('/')"
+      type="button"
+      class="btn btn-secondary position-absolute"
+      data-toggle="tooltip"
+      data-placement="top"
+      title="Voltar"
+    >
+      <img src="assets/icons/back.svg" alt="Voltar" />
+      Voltar
+    </button>
+    <div class="card-body">
+      <h1 class="card-title">
+        <img src="assets/icons/category.svg" alt="Clientes" />
+        Categorias
+      </h1>
+      <p class="text-center mt-3">Segue suas categorias cadastradas...</p>
+      <div
+        *ngIf="isLoading$ | async; else content"
+        class="d-flex justify-content-center"
+      >
+        <div class="spinner-border text-secondary"></div>
+      </div>
+      <ng-template #content>
+        <form [formGroup]="form" (submit)="save()">
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-xl-10">
+              <div class="form-group">
+                <label>Descrição:</label>
+                <input
+                  #description
+                  type="text"
+                  class="form-control mt-1"
+                  formControlName="description"
+                  placeholder="Digite a descrição da categoria..."
+                />
+                <Message-Control-Error
+                  [control]="form.get('description')"
+                  error="required"
+                  msg="Descrição é obrigatório."
+                >
+                </Message-Control-Error>
+                <Message-Control-Error
+                  [control]="form.get('description')"
+                  error="maxlength"
+                  msg="Descrição precisa ter no máximo 50 caracteres."
+                >
+                </Message-Control-Error>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-xl-2">
+              <button
+                type="submit"
+                class="btn btn-success float-end"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Cadastrar"
+              >
+                <img src="assets/icons/save.svg" alt="Salvar" />
+                {{ buttonSave }}
+              </button>
+            </div>
+          </div>
+        </form>
+        <div
+          *ngIf="(categories$ | async)?.length > 0; else emptyResults"
+          class="table-responsive mt-3"
+        >
+          <table
+            *ngIf="!(isLoading$ | async)"
+            class="table table-hover table-bordered"
+          >
+            <thead class="thead-light">
+              <tr>
+                <th>Descrição</th>
+                <th width="15%" class="text-center">Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let category of categories$ | async">
+                <td>{{ category?.description }}</td>
+                <td class="text-center">
+                  <div class="btn-group">
+                    <button
+                      (click)="categoryToEdit(category)"
+                      type="button"
+                      class="btn btn-info"
+                      data-toggle="tooltip"
+                      data-placement="top"
+                      title="Editar"
+                    >
+                      <img src="assets/icons/pencil.svg" alt="Editar" />
+                    </button>
+                    <button
+                      (click)="delete(category)"
+                      type="button"
+                      class="btn btn-danger"
+                      data-toggle="tooltip"
+                      data-placement="top"
+                      title="Excluir"
+                    >
+                      <img src="assets/icons/trash.svg" alt="Excluir" />
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <ng-template #emptyResults
+          ><span class="d-flex justify-content-center mt-3"
+            >Nenhum resultado encontrado.</span
+          ></ng-template
+        >
+      </ng-template>
+    </div>
+  </div>
+</div>
