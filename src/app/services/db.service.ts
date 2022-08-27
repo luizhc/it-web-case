@@ -8,6 +8,8 @@ import { map, Observable } from 'rxjs';
 
 type CollectionPredicate<T> = string | AngularFirestoreCollection<T>;
 
+export const newDate = new Date().toLocaleString();
+
 @Injectable({
   providedIn: 'root',
 })

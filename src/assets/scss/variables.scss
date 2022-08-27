@@ -98,3 +98,14 @@ textarea::placeholder {
 .form-group {
   margin-top: 0.5rem;
 }
+
+@media (max-width: 768px) {
+  .card-body {
+    margin-top: 4rem;
+  }
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.3;
+}

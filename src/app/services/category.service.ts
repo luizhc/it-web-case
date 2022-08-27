@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { Collection } from '../enums/collections.enums';
 import { Category } from '../models/category.model';
-import { DbService } from './db.service';
+import { DbService, newDate } from './db.service';
 
 @Injectable({
   providedIn: 'root',
@@ -31,11 +31,14 @@ export class CategoryService {
   add(data: any) {
     return this.afs
       .collection(Collection.CATEGORIES)
-      .add({ ...data, createdAt: new Date() });
+      .add({ ...data, createdAt: newDate, updatedAt: newDate });
   }
 
   update(uid: string, data: any) {
-    return this.getByUid(uid).set(data, { merge: true });
+    return this.getByUid(uid).set(
+      { ...data, updatedAt: newDate },
+      { merge: true }
+    );
   }
 
   delete(uid: string) {

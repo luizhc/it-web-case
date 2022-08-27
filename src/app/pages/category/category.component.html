@@ -13,7 +13,7 @@
     </button>
     <div class="card-body">
       <h1 class="card-title">
-        <img src="assets/icons/category.svg" alt="Clientes" />
+        <img src="assets/icons/category.svg" alt="Categorias" />
         Categorias
       </h1>
       <p class="text-center mt-3">Segue suas categorias cadastradas...</p>
@@ -24,48 +24,51 @@
         <div class="spinner-border text-secondary"></div>
       </div>
       <ng-template #content>
-        <form [formGroup]="form" (submit)="save()">
-          <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-xl-10">
-              <div class="form-group">
-                <label>Descrição:</label>
-                <input
-                  #description
-                  type="text"
-                  class="form-control mt-1"
-                  formControlName="description"
-                  placeholder="Digite a descrição da categoria..."
-                />
-                <Message-Control-Error
-                  [control]="form.get('description')"
-                  error="required"
-                  msg="Descrição é obrigatório."
-                >
-                </Message-Control-Error>
-                <Message-Control-Error
-                  [control]="form.get('description')"
-                  error="maxlength"
-                  msg="Descrição precisa ter no máximo 50 caracteres."
-                >
-                </Message-Control-Error>
-              </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12 col-xl-2">
-              <button
-                type="submit"
-                class="btn btn-success float-end"
-                data-toggle="tooltip"
-                data-placement="top"
-                title="Cadastrar"
+        <div class="row components-filter">
+          <div class="col-xs-12 col-sm-12 col-md-8 col-xl-6">
+            <form [formGroup]="formFilter" (submit)="save()">
+              <div
+                class="input-group input-filter"
+                [class.disabled]="
+                  (categories$ | async)?.length === 0 &&
+                  !formFilter.get('filter').value
+                "
               >
-                <img src="assets/icons/save.svg" alt="Salvar" />
-                {{ buttonSave }}
-              </button>
-            </div>
+                <input
+                  #filterInput
+                  type="text"
+                  class="form-control"
+                  placeholder="Pesquise por qualquer coluna..."
+                  formControlName="filter"
+                />
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Limpar"
+                  (click)="clearInput()"
+                >
+                  <img src="assets/icons/clear.svg" alt="Limpar" />
+                </button>
+              </div>
+            </form>
           </div>
-        </form>
+          <div
+            class="col-xs-12 col-sm-12 col-md-4 col-xl-6 d-flex justify-content-end"
+          >
+            <button
+              type="button"
+              class="btn btn-primary btn-new"
+              (click)="new()"
+            >
+              <img src="assets/icons/plus.svg" alt="Salvar" />
+              Cadastrar
+            </button>
+          </div>
+        </div>
         <div
-          *ngIf="(categories$ | async)?.length > 0; else emptyResults"
+          *ngIf="(categories$ | async)?.length > 0"
           class="table-responsive mt-3"
         >
           <table
@@ -75,18 +78,22 @@
             <thead class="thead-light">
               <tr>
                 <th>Descrição</th>
+                <th>Data Criação</th>
+                <th>Data Última Atualização</th>
                 <th width="15%" class="text-center">Ações</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let category of categories$ | async">
+              <tr *ngFor="let category of categories$ | async; let i = index">
                 <td>{{ category?.description }}</td>
+                <td>{{ category?.createdAt }}</td>
+                <td>{{ category?.updatedAt }}</td>
                 <td class="text-center">
                   <div class="btn-group">
                     <button
-                      (click)="categoryToEdit(category)"
                       type="button"
                       class="btn btn-info"
+                      (click)="edit(category)"
                       data-toggle="tooltip"
                       data-placement="top"
                       title="Editar"
@@ -109,12 +116,87 @@
             </tbody>
           </table>
         </div>
-        <ng-template #emptyResults
-          ><span class="d-flex justify-content-center mt-3"
-            >Nenhum resultado encontrado.</span
-          ></ng-template
-        >
+        <No-Results-Found
+          *ngIf="(categories$ | async)?.length === 0"
+        ></No-Results-Found>
       </ng-template>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div #openModal data-bs-toggle="modal" data-bs-target="#categoryModal"></div>
+<div
+  class="modal fade"
+  id="categoryModal"
+  tabindex="-1"
+  aria-labelledby="categoryModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="categoryModalLabel">
+          <img width="18" src="assets/icons/category.svg" alt="Categorias" />
+          {{ action }} categoria
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <form [formGroup]="formCategory" (submit)="save()">
+        <div class="modal-body">
+          <div class="row">
+            <div class="form-group">
+              <input type="hidden" formControlName="uid" />
+              <label>Descrição:</label>
+              <input
+                #descriptionInput
+                type="text"
+                class="form-control mt-1"
+                formControlName="description"
+                placeholder="Digite a descrição da categoria..."
+              />
+              <Message-Control-Error
+                [control]="formCategory.get('description')"
+                error="required"
+                msg="Descrição é obrigatório."
+              >
+              </Message-Control-Error>
+              <Message-Control-Error
+                [control]="formCategory.get('description')"
+                error="maxlength"
+                msg="Descrição precisa ter no máximo 50 caracteres."
+              >
+              </Message-Control-Error>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            #closeModal
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Sair
+          </button>
+          <button
+            type="submit"
+            class="btn btn-success"
+            data-toggle="tooltip"
+            data-placement="top"
+            title="Salvar"
+            [disabled]="disabledSave && !formCategory.valid"
+          >
+            <img src="assets/icons/save.svg" alt="Salvar" />
+            Salvar
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 </div>

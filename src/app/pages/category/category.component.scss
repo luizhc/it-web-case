@@ -1,17 +1,8 @@
-@media (min-width: 1200px) {
-  .btn-success {
-    margin-top: 35px;
+@media (max-width: 767px) {
+  .components-filter {
+    flex-direction: column-reverse;
   }
-}
-
-@media (max-width: 1199px) {
-  .btn-success {
-    margin-top: 15px;
-  }
-}
-
-@media (max-width: 768px) {
-  .card-body {
-    margin-top: 4rem;
+  .input-filter {
+    margin-top: 1rem;
   }
 }
