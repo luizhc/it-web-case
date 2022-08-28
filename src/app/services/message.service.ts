@@ -16,8 +16,8 @@ export class MessageService {
 
   async confirmBoxDelete(message: string): Promise<boolean> {
     const result = await Swal.fire({
-      title: Messages.DELETE.TITLE.replace('{categoria}', `<b>${message}</b>`),
-      text: Messages.DELETE.TEXT,
+      title: Messages.DELETE.TITLE,
+      html: Messages.DELETE.TEXT.replace('{text}', message),
       icon: Messages.DELETE.ICON as SweetAlertIcon,
       showCancelButton: true,
       confirmButtonText: 'Sim',

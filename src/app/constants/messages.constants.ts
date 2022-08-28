@@ -1,7 +1,7 @@
 export const Messages = {
   CATEGORY_ADDED: {
     TITLE: 'Parabéns!',
-    TEXT: 'Categoria {categoria} cadastrada com sucesso.',
+    TEXT: 'Categoria {text} cadastrada com sucesso.',
     ICON: 'success',
   },
   CATEGORY_UPDATED: {
@@ -10,12 +10,17 @@ export const Messages = {
     ICON: 'success',
   },
   DELETE: {
-    TITLE: 'Tem certeza que deseja remover {categoria} ?',
-    TEXT: 'Você não poderá mais recuperar este registro!',
+    TITLE: 'Atenção!',
+    TEXT: 'Após está ação você não poderá mais recuperar este registro. <br> Tem certeza que deseja remover {text}?',
     ICON: 'warning',
   },
+  ERROR: {
+    TITLE: 'Ops!',
+    TEXT: 'Houve algum problema. <br> Por favor, tente novamente.',
+    ICON: 'error',
+  },
   REQUIRED_FIELDS: {
-    TITLE: 'Atenção!',
+    TITLE: 'Ops!',
     TEXT: 'Existem campos obrigatórios não preenchidos ou incorretos.',
     ICON: 'warning',
   },

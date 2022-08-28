@@ -53,6 +53,36 @@ export class UtilService {
     );
   }
 
+  getOnlyNumbers(value: string): string {
+    if (value) {
+      value = value.replace(/\D/g, ''); // remove caracteres
+    }
+    return value;
+  }
+
+  convertToMoney(value: string | number, ignoreSymbol = false): string {
+    value = String(value);
+    if (value) {
+      value = value.replace(/,/, '.'); // replace comma with dot, ex: 345,12 to 345.12
+      value = parseFloat(value).toFixed(2); // fix two decimal places after the comma, ex: 345.1 to 345.10
+      value = this.getOnlyNumbers(value);
+      // extract real and cents in number
+      const number = parseFloat(
+        `${value.substring(0, value.length - 2)}.${value.slice(-2)}`
+      );
+      // convert to pt-BR and currency BRL
+      value = Number(number.toFixed(2)).toLocaleString('pt-BR', {
+        style: 'currency',
+        currency: 'BRL',
+      });
+      if (ignoreSymbol) {
+        value = value.replace('R$', '').trim(); // remove R$
+      }
+    }
+
+    return value;
+  }
+
   saveVisit(action: string) {
     this.httpClient
       .get<any[]>(APIs.GEOLOCATION)

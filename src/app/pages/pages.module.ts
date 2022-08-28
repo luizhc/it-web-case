@@ -13,6 +13,12 @@ import {
 } from './category/state/category.component.reducer';
 import { ExpenseDetailComponent } from './expense/expense-detail/expense-detail.component';
 import { ExpenseListComponent } from './expense/expense-list/expense-list.component';
+import { ExpenseListEffects } from './expense/expense-list/state/expense-list.component.effects';
+import { ExpenseListFacade } from './expense/expense-list/state/expense-list.component.facade';
+import {
+  expenseListFeatureKey,
+  expenseListReducer,
+} from './expense/expense-list/state/expense-list.component.reducer';
 
 @NgModule({
   declarations: [
@@ -25,7 +31,9 @@ import { ExpenseListComponent } from './expense/expense-list/expense-list.compon
     SharedModule,
     StoreModule.forFeature(categoryFeatureKey, categoryReducer),
     EffectsModule.forFeature([CategoryEffects]),
+    StoreModule.forFeature(expenseListFeatureKey, expenseListReducer),
+    EffectsModule.forFeature([ExpenseListEffects]),
   ],
-  providers: [CategoryFacade],
+  providers: [CategoryFacade, ExpenseListFacade],
 })
 export class PagesModule {}

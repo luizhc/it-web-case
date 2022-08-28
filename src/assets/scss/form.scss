@@ -38,6 +38,16 @@ textarea::placeholder {
   font-style: italic;
 }
 
+@media (max-width: 767px) {
+  .components-filter {
+    flex-direction: column-reverse;
+  }
+
+  .input-filter {
+    margin-top: 1rem;
+  }
+}
+
 // .form-group {
 //   margin-top: 0.5rem;
 // }

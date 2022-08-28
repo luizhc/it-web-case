@@ -1,1 +1,155 @@
-<p>expense-list works!</p>
+<div class="container col-xs-12 col-sm-12 col-md-12 col-xl-10">
+  <div class="shadow-lg p-4 mb-5 bg-white rounded">
+    <button
+      (click)="utilService.navigateByUrl('/')"
+      type="button"
+      class="btn btn-secondary position-absolute"
+      data-toggle="tooltip"
+      data-placement="top"
+      title="Voltar"
+    >
+      <img src="assets/icons/back.svg" alt="Voltar" />
+      Voltar
+    </button>
+    <div class="card-body">
+      <h1 class="card-title mb-3">
+        <img width="40" src="assets/icons/money-bag.png" alt="Lançamentos" />
+        Lançamentos
+      </h1>
+      <p class="text-center mb-4">
+        Aqui ficam todos seus lançamentos de gastos pessoais.
+      </p>
+      <div
+        *ngIf="isLoading$ | async; else content"
+        class="d-flex justify-content-center"
+      >
+        <div class="spinner-border text-secondary"></div>
+      </div>
+      <ng-template #content>
+        <div class="row components-filter">
+          <div class="col-xs-12 col-sm-12 col-md-8 col-xl-6">
+            <form [formGroup]="formFilter">
+              <div
+                class="input-group input-filter"
+                [class.disabled]="
+                  (expenses$ | async)?.length === 0 &&
+                  !formFilter.get('filter').value
+                "
+              >
+                <input
+                  #filterInput
+                  type="text"
+                  class="form-control"
+                  placeholder="Pesquise por qualquer coluna..."
+                  formControlName="filter"
+                />
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Limpar"
+                  (click)="clearFilter()"
+                >
+                  <img src="assets/icons/clear.svg" alt="Limpar" />
+                </button>
+              </div>
+            </form>
+          </div>
+          <div
+            class="col-xs-12 col-sm-12 col-md-4 col-xl-6 d-flex justify-content-end"
+          >
+            <button
+              type="button"
+              class="btn btn-primary"
+              (click)="utilService.navigateByUrl('lancamentos/detalhe')"
+            >
+              <img src="assets/icons/plus.svg" alt="Salvar" />
+              Novo
+            </button>
+          </div>
+        </div>
+        <div
+          *ngIf="(expenses$ | async)?.length > 0"
+          class="table-responsive mt-3"
+        >
+          <table
+            *ngIf="!(isLoading$ | async)"
+            class="table table-hover table-bordered"
+          >
+            <thead class="thead-light">
+              <tr>
+                <th width="10%">Categoria</th>
+                <th width="25%">Nome</th>
+                <th width="10%">Valor</th>
+                <th width="20%" class="hidden-xs hidden-sm hidden-md">
+                  Data Criação
+                </th>
+                <th width="20%" class="hidden-xs hidden-sm hidden-md">
+                  Data Última Atualização
+                </th>
+                <th width="15%" class="text-center">Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let expense of expenses$ | async; let i = index">
+                <td>
+                  <a href (click)="navigateToCategories($event)">{{
+                    expense?.category?.description
+                  }}</a>
+                </td>
+                <td class="text-truncate">{{ expense?.name }}</td>
+                <td>
+                  {{ expense?.value | currency: "R$" }}
+                </td>
+                <td class="hidden-xs hidden-sm hidden-md">
+                  {{ expense?.createdAt | timestampToDate }}
+                </td>
+                <td class="hidden-xs hidden-sm hidden-md">
+                  {{ expense?.updatedAt | timestampToDate }}
+                </td>
+                <td class="text-center">
+                  <div class="btn-group">
+                    <button
+                      type="button"
+                      class="btn btn-info"
+                      (click)="edit(expense)"
+                      data-toggle="tooltip"
+                      data-placement="top"
+                      title="Editar"
+                    >
+                      <img src="assets/icons/pencil.svg" alt="Editar" />
+                    </button>
+                    <button
+                      (click)="delete(expense)"
+                      type="button"
+                      class="btn btn-danger"
+                      data-toggle="tooltip"
+                      data-placement="top"
+                      title="Excluir"
+                    >
+                      <img src="assets/icons/trash.svg" alt="Excluir" />
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <th colspan="2">Total</th>
+                <td>
+                  <strong>{{
+                    expenses$ | async | sum: "value" | currency: "R$"
+                  }}</strong>
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+        <No-Results-Found
+          *ngIf="(expenses$ | async)?.length === 0"
+        ></No-Results-Found>
+      </ng-template>
+    </div>
+  </div>
+</div>

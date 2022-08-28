@@ -11,7 +11,7 @@ import { FirestoreService } from './firestore.service';
 export class CategoryService {
   constructor(private firestoreService: FirestoreService) {}
 
-  getAll(): Observable<Category[]> {
+  get(): Observable<Category[]> {
     return this.firestoreService.collection$(Collection.CATEGORIES, (query) =>
       query.orderBy('createdAt')
     );
@@ -22,9 +22,8 @@ export class CategoryService {
   }
 
   getByName(description: string) {
-    return this.firestoreService.colWithId$<Category>(
-      Collection.CATEGORIES,
-      (ref) => ref.where('description', '==', description)
+    return this.firestoreService.col<Category>(Collection.CATEGORIES, (query) =>
+      query.where('description', '==', description)
     );
   }
 

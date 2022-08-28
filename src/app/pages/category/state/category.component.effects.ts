@@ -38,7 +38,7 @@ export class CategoryEffects {
       this.actions$.pipe(
         ofType(getCategories),
         tap(() => {
-          this.categoryService.getAll().subscribe({
+          this.categoryService.get().subscribe({
             next: (categories: Category[]) =>
               this.store.dispatch(getCategoriesSuccess({ categories })),
             error: () => this.store.dispatch(getCategoriesFailure()),
@@ -59,8 +59,8 @@ export class CategoryEffects {
               this.messageService.alertWithIcon(
                 Messages.CATEGORY_ADDED.TITLE,
                 Messages.CATEGORY_ADDED.TEXT.replace(
-                  '{categoria}',
-                  `<b>${data.description}</b>`
+                  '{text}',
+                  `<strong>${data.description}</strong>`
                 ),
                 Messages.CATEGORY_ADDED.ICON as SweetAlertIcon
               );
@@ -99,7 +99,9 @@ export class CategoryEffects {
         ofType(deleteCategory),
         tap(({ category }) => {
           this.messageService
-            .confirmBoxDelete(`Categoria <b>${category.description}</b>`)
+            .confirmBoxDelete(
+              `Categoria <strong>${category.description}</strong>`
+            )
             .then((res) => {
               if (res) {
                 this.categoryService

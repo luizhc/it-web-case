@@ -5,7 +5,8 @@ import {
   QueryFn,
 } from '@angular/fire/compat/firestore';
 import firebase from 'firebase/compat/app';
-import { map, Observable } from 'rxjs';
+import { combineLatest, defer, map, Observable, of, switchMap } from 'rxjs';
+import { Collection } from '../enums/collections.enums';
 
 type CollectionPredicate<T> = string | AngularFirestoreCollection<T>;
 
@@ -20,16 +21,19 @@ export class FirestoreService {
     return firebase.firestore.FieldValue.serverTimestamp();
   }
 
-  collection$(path: string, query?: QueryFn): Observable<any[]> {
-    return this.afs
-      .collection(path, query)
+  collection$<T>(
+    ref: CollectionPredicate<T>,
+    query?: QueryFn
+  ): Observable<T[]> {
+    return this.col(ref, query)
       .snapshotChanges()
       .pipe(
-        map((actions: any) => {
-          return actions.map((action: any) => ({
-            uid: action.payload.doc.id,
-            ...action.payload.doc.data(),
-          }));
+        map((actions) => {
+          return actions.map((a) => {
+            const data = a.payload.doc.data();
+            const uid = a.payload.doc.id;
+            return { uid, ...(data as any) };
+          });
         })
       );
   }
@@ -83,20 +87,54 @@ export class FirestoreService {
     return typeof ref === 'string' ? this.afs.collection<T>(ref, queryFn) : ref;
   }
 
-  colWithId$<T>(
-    ref: CollectionPredicate<T>,
-    queryFn?: QueryFn
-  ): Observable<T[]> {
-    return this.col(ref, queryFn)
-      .snapshotChanges()
-      .pipe(
-        map((actions) => {
-          return actions.map((a) => {
-            const data = a.payload.doc.data();
-            const uid = a.payload.doc.id;
-            return { uid, ...(data as any) };
-          });
-        })
-      );
-  }
+  leftJoinDocument =
+    (fieldToJoin: string, collection: Collection) =>
+    <T>(source: Observable<T[]>) =>
+      defer(() => {
+        // Operator state
+        let collectionData: any;
+        const cache = new Map();
+
+        return source.pipe(
+          switchMap((data) => {
+            // Clear mapping on each emitted val ;
+            cache.clear();
+
+            // Save the parent data state
+            collectionData = data as any[];
+
+            const reads$ = [];
+            let i = 0;
+            for (const doc of collectionData) {
+              // Skip if doc field does not exist or is already in cache
+              if (!doc[fieldToJoin] || cache.get(doc[fieldToJoin])) {
+                continue;
+              }
+
+              // Push doc read to Array
+              reads$.push(
+                this.afs
+                  .collection(collection)
+                  .doc(doc[fieldToJoin])
+                  .valueChanges()
+              );
+              cache.set(doc[fieldToJoin], i);
+              i++;
+            }
+
+            return reads$.length ? combineLatest(reads$) : of([]);
+          }),
+          map((joins) => {
+            return collectionData.map((v: any, i: any) => {
+              const joinIndex = cache.get(v[fieldToJoin]);
+              return { ...v, [fieldToJoin]: joins[joinIndex] || null };
+            });
+          })
+          // tap(final =>
+          //     console.log(
+          //         `Queried ${(final as any).length}, Joined ${cache.size} docs`
+          //     )
+          // )
+        );
+      });
 }

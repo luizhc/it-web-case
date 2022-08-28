@@ -109,7 +109,7 @@ export class CategoryComponent implements OnInit {
     );
   }
 
-  clearInput() {
+  clearFilter() {
     this.formFilter.reset();
     setTimeout(() => this.filterInput.nativeElement.focus(), 1000);
   }
