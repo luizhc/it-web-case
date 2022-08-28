@@ -1,16 +1,16 @@
 export const Messages = {
-  CATEGORY_ADDED: {
-    TITLE: 'Parabéns!',
-    TEXT: 'Categoria {text} cadastrada com sucesso.',
+  INSERT: {
+    TITLE: 'Uhul!',
+    TEXT: '{text} cadastrado(a) com sucesso.',
     ICON: 'success',
   },
-  CATEGORY_UPDATED: {
-    TITLE: 'Parabéns!',
-    TEXT: 'Categoria atualizada com sucesso.',
+  UPDATE: {
+    TITLE: 'Uhul!',
+    TEXT: '{text} atualizado(a) com sucesso.',
     ICON: 'success',
   },
   DELETE: {
-    TITLE: 'Atenção!',
+    TITLE: 'Opa! ',
     TEXT: 'Após está ação você não poderá mais recuperar este registro. <br> Tem certeza que deseja remover {text}?',
     ICON: 'warning',
   },

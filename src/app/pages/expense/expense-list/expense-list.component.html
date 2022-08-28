@@ -79,7 +79,9 @@
           >
             <thead class="thead-light">
               <tr>
-                <th width="10%">Categoria</th>
+                <th width="10%">
+                  <a href (click)="navigateToCategories($event)">Categoria</a>
+                </th>
                 <th width="25%">Nome</th>
                 <th width="10%">Valor</th>
                 <th width="20%" class="hidden-xs hidden-sm hidden-md">
@@ -93,11 +95,7 @@
             </thead>
             <tbody>
               <tr *ngFor="let expense of expenses$ | async; let i = index">
-                <td>
-                  <a href (click)="navigateToCategories($event)">{{
-                    expense?.category?.description
-                  }}</a>
-                </td>
+                <td>{{ expense?.category?.description }}</td>
                 <td class="text-truncate">{{ expense?.name }}</td>
                 <td>
                   {{ expense?.value | currency: "R$" }}
@@ -137,7 +135,7 @@
             <tfoot>
               <tr>
                 <th colspan="2">Total</th>
-                <td>
+                <td colspan="4">
                   <strong>{{
                     expenses$ | async | sum: "value" | currency: "R$"
                   }}</strong>

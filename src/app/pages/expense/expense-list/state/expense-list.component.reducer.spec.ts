@@ -1,1 +1,1 @@
-describe('CategoryReducer', () => {});
+describe('ExpenseListReducer', () => {});

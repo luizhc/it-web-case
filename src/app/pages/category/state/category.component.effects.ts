@@ -57,12 +57,12 @@ export class CategoryEffects {
             .create(data)
             .then(() => {
               this.messageService.alertWithIcon(
-                Messages.CATEGORY_ADDED.TITLE,
-                Messages.CATEGORY_ADDED.TEXT.replace(
+                Messages.INSERT.TITLE,
+                Messages.INSERT.TEXT.replace(
                   '{text}',
-                  `<strong>${data.description}</strong>`
+                  `Categoria <strong>${data.description}</strong>`
                 ),
-                Messages.CATEGORY_ADDED.ICON as SweetAlertIcon
+                Messages.INSERT.ICON as SweetAlertIcon
               );
               this.store.dispatch(addCategorySuccess());
             })
@@ -81,9 +81,9 @@ export class CategoryEffects {
             .update(uid, data)
             .then(() => {
               this.messageService.alertWithIcon(
-                Messages.CATEGORY_UPDATED.TITLE,
-                Messages.CATEGORY_UPDATED.TEXT,
-                Messages.CATEGORY_UPDATED.ICON as SweetAlertIcon
+                Messages.UPDATE.TITLE,
+                Messages.UPDATE.TEXT.replace('{text}', `Categoria`),
+                Messages.UPDATE.ICON as SweetAlertIcon
               );
               this.store.dispatch(updateCategorySuccess());
             })

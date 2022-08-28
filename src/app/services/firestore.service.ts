@@ -112,12 +112,7 @@ export class FirestoreService {
               }
 
               // Push doc read to Array
-              reads$.push(
-                this.afs
-                  .collection(collection)
-                  .doc(doc[fieldToJoin])
-                  .valueChanges()
-              );
+              reads$.push(this.doc$(`${collection}/${doc[fieldToJoin]}`));
               cache.set(doc[fieldToJoin], i);
               i++;
             }

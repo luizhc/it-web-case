@@ -3,7 +3,9 @@ input.ng-dirty.ng-invalid,
 textarea.ng-touched.ng-invalid,
 textarea.ng-dirty.ng-invalid,
 select.ng-touched.ng-invalid,
-select.ng-dirty.ng-invalid {
+select.ng-dirty.ng-invalid,
+p-inputnumber.ng-touched.ng-invalid,
+p-inputnumber.ng-dirty.ng-invalid {
   border-color: var(--color-invalid);
 }
 
@@ -12,11 +14,14 @@ input.ng-dirty.ng-valid,
 textarea.ng-touched.ng-valid,
 textarea.ng-dirty.ng-valid,
 select.ng-touched.ng-valid,
-select.ng-dirty.ng-valid {
+select.ng-dirty.ng-valid,
+p-inputnumber.ng-touched.ng-valid,
+p-inputnumber.ng-dirty.ng-valid {
   border-color: var(--color-valid);
 }
 
-.form-control:focus {
+.form-control:focus,
+p-inputnumber.p-inputwrapper-focus {
   outline: 0;
   border: var(--border-valid);
   -webkit-box-shadow: var(--border-focus-valid);
@@ -25,7 +30,9 @@ select.ng-dirty.ng-valid {
 }
 
 .form-control.ng-touched.ng-invalid:focus,
-.form-control.ng-dirty.ng-invalid:focus {
+.form-control.ng-dirty.ng-invalid:focus,
+p-inputnumber.ng-touched.ng-invalid.p-inputwrapper-focus,
+p-inputnumber.ng-dirty.ng-invalid.p-inputwrapper-focus {
   outline: 0;
   border: var(--border-invalid);
   -webkit-box-shadow: var(--border-focus-invalid);
@@ -48,6 +55,16 @@ textarea::placeholder {
   }
 }
 
-// .form-group {
-//   margin-top: 0.5rem;
-// }
+.form-group {
+  margin-top: 0.5rem;
+}
+
+p-inputnumber {
+  span {
+    input {
+      border: none;
+      outline: 0;
+      padding: 0;
+    }
+  }
+}

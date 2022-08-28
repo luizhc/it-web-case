@@ -1,1 +1,141 @@
-<p>expense-detail works!</p>
+<div class="container col-11 p-5">
+  <div class="shadow-lg p-3 mb-5 bg-white rounded">
+    <button
+      (click)="utilService.navigateByUrl('lancamentos')"
+      type="button"
+      class="btn btn-secondary position-absolute"
+      data-toggle="tooltip"
+      data-placement="top"
+      title="Voltar"
+    >
+      <img src="assets/icons/back.svg" alt="Voltar" />
+      Voltar
+    </button>
+    <div class="card-body">
+      <h1 class="card-title">
+        <img width="40" src="assets/icons/money-bag.png" alt="Lançamento" />
+        {{ action }} lançamento
+      </h1>
+      <p class="text-center mb-4">Aqui você gerencia seu lançamento.</p>
+      <pre>{{ formExpense.value | json }}</pre>
+      <form [formGroup]="formExpense" (submit)="save()">
+        <div class="row">
+          <div class="col-sm-12 col-md-6 col-lg-3">
+            <div class="form-group">
+              <label>Categoria</label>
+              <select
+                class="form-control"
+                formControlName="category"
+                [compareWith]="utilService.compareWithDescription"
+              >
+                <option value="" disabled>Selecione a categoria...</option>
+                <option
+                  *ngFor="let category of categories$ | async"
+                  [ngValue]="category"
+                >
+                  {{ category?.description }}
+                </option>
+              </select>
+            </div>
+            <Message-Control-Error
+              [control]="formExpense.get('category')"
+              error="required"
+              msg="Categoria é obrigatório."
+            >
+            </Message-Control-Error>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-3">
+            <div class="form-group">
+              <label>Data</label>
+              <input
+                type="date"
+                class="form-control bg-light"
+                formControlName="date"
+                [max]="utilService.getDateToday()"
+              />
+            </div>
+            <Message-Control-Error
+              [control]="formExpense.get('date')"
+              error="required"
+              msg="Data é obrigatório."
+            >
+            </Message-Control-Error>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-3">
+            <div class="form-group">
+              <label>Nome</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="name"
+                placeholder="Digite o nome..."
+              />
+            </div>
+            <Message-Control-Error
+              [control]="formExpense.get('name')"
+              error="required"
+              msg="Nome é obrigatório."
+            >
+            </Message-Control-Error>
+            <Message-Control-Error
+              [control]="formExpense.get('name')"
+              error="maxlength"
+              msg="Nome precisa ter no máximo 50 caracteres."
+            >
+            </Message-Control-Error>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-3">
+            <div class="form-group">
+              <label>Valor</label>
+              <div class="input-group">
+                <span class="input-group-text">R$</span>
+                <p-inputNumber
+                  class="form-control"
+                  formControlName="value"
+                  placeholder="Digite o valor..."
+                  mode="decimal"
+                  [minFractionDigits]="2"
+                  [maxFractionDigits]="2"
+                ></p-inputNumber>
+              </div>
+            </div>
+            <Message-Control-Error
+              [control]="formExpense.get('value')"
+              error="required"
+              msg="Valor é obrigatório."
+            >
+            </Message-Control-Error>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="form-group">
+              <label>Observação</label>
+              <textarea
+                rows="4"
+                class="form-control"
+                placeholder="Aqui você pode colocar algumas observações sobre o lançamento..."
+                formControlName="observation"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 mt-3">
+            <button
+              type="submit"
+              class="btn btn-success float-end"
+              data-toggle="tooltip"
+              data-placement="top"
+              title="Salvar"
+              [disabled]="disabledSave && !formExpense.valid"
+            >
+              <img src="assets/icons/save.svg" [alt]="action" />
+              Salvar
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -24,7 +24,11 @@ const localStorageSyncReducer = (
   reducer: ActionReducer<any>
 ): ActionReducer<any> => {
   return localStorageSync({
-    keys: [],
+    keys: [
+      {
+        'expense-list': ['expenseSelected'],
+      },
+    ],
     rehydrate: true,
   })(reducer);
 };

@@ -35,11 +35,11 @@ export class ExpenseListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.buildForms();
+    this.buildForm();
     this.setup();
   }
 
-  private buildForms() {
+  private buildForm() {
     this.formFilter = this.formBuilder.group({
       filter: [''],
     });

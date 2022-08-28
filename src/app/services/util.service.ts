@@ -36,6 +36,16 @@ export class UtilService {
     return date;
   }
 
+  getDateToday() {
+    return new Date().toJSON().split('T')[0];
+  }
+
+  compareWithDescription(obj1: any, obj2: any) {
+    return obj1 && obj2
+      ? obj1.uid === obj2.uid && obj1.description === obj2.description
+      : obj1 === obj2;
+  }
+
   markAllFieldsAsDirty(formGroup: FormGroup) {
     Object.keys(formGroup.controls).forEach((field) => {
       const control = formGroup.get(field);

@@ -12,6 +12,12 @@ import {
   categoryReducer,
 } from './category/state/category.component.reducer';
 import { ExpenseDetailComponent } from './expense/expense-detail/expense-detail.component';
+import { ExpenseDetailEffects } from './expense/expense-detail/state/expense-detail.component.effects';
+import { ExpenseDetailFacade } from './expense/expense-detail/state/expense-detail.component.facade';
+import {
+  expenseDetailFeatureKey,
+  expenseDetailReducer,
+} from './expense/expense-detail/state/expense-detail.component.reducer';
 import { ExpenseListComponent } from './expense/expense-list/expense-list.component';
 import { ExpenseListEffects } from './expense/expense-list/state/expense-list.component.effects';
 import { ExpenseListFacade } from './expense/expense-list/state/expense-list.component.facade';
@@ -33,7 +39,9 @@ import {
     EffectsModule.forFeature([CategoryEffects]),
     StoreModule.forFeature(expenseListFeatureKey, expenseListReducer),
     EffectsModule.forFeature([ExpenseListEffects]),
+    StoreModule.forFeature(expenseDetailFeatureKey, expenseDetailReducer),
+    EffectsModule.forFeature([ExpenseDetailEffects]),
   ],
-  providers: [CategoryFacade, ExpenseListFacade],
+  providers: [CategoryFacade, ExpenseListFacade, ExpenseDetailFacade],
 })
 export class PagesModule {}
