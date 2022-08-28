@@ -26,6 +26,16 @@ export class UtilService {
     this.router.navigateByUrl(route);
   }
 
+  castTimestampFirebaseToDate(timestamp: any): string {
+    let date = '-';
+    if (timestamp) {
+      const fireBaseTime = new Date(timestamp.toDate());
+      date = fireBaseTime.toLocaleString();
+    }
+
+    return date;
+  }
+
   markAllFieldsAsDirty(formGroup: FormGroup) {
     Object.keys(formGroup.controls).forEach((field) => {
       const control = formGroup.get(field);

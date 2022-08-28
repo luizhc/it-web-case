@@ -12,11 +12,13 @@
       Voltar
     </button>
     <div class="card-body">
-      <h1 class="card-title">
+      <h1 class="card-title mb-3">
         <img src="assets/icons/category.svg" alt="Categorias" />
         Categorias
       </h1>
-      <p class="text-center mt-3">Segue suas categorias cadastradas...</p>
+      <p class="text-center mb-5">
+        Aqui ficam todas as suas categorias cadastradas.
+      </p>
       <div
         *ngIf="isLoading$ | async; else content"
         class="d-flex justify-content-center"
@@ -63,7 +65,7 @@
               (click)="new()"
             >
               <img src="assets/icons/plus.svg" alt="Salvar" />
-              Cadastrar
+              Novo
             </button>
           </div>
         </div>
@@ -77,17 +79,25 @@
           >
             <thead class="thead-light">
               <tr>
-                <th>Descrição</th>
-                <th>Data Criação</th>
-                <th>Data Última Atualização</th>
+                <th width="35%">Descrição</th>
+                <th width="25%" class="hidden-xs hidden-sm hidden-md">
+                  Data Criação
+                </th>
+                <th width="25%" class="hidden-xs hidden-sm hidden-md">
+                  Data Última Atualização
+                </th>
                 <th width="15%" class="text-center">Ações</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let category of categories$ | async; let i = index">
-                <td>{{ category?.description }}</td>
-                <td>{{ category?.createdAt }}</td>
-                <td>{{ category?.updatedAt }}</td>
+                <td class="text-truncate">{{ category?.description }}</td>
+                <td class="hidden-xs hidden-sm hidden-md">
+                  {{ category?.createdAt | timestampToDate }}
+                </td>
+                <td class="hidden-xs hidden-sm hidden-md">
+                  {{ category?.updatedAt | timestampToDate }}
+                </td>
                 <td class="text-center">
                   <div class="btn-group">
                     <button
@@ -151,7 +161,6 @@
         <div class="modal-body">
           <div class="row">
             <div class="form-group">
-              <input type="hidden" formControlName="uid" />
               <label>Descrição:</label>
               <input
                 #descriptionInput

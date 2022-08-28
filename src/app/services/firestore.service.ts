@@ -4,17 +4,21 @@ import {
   AngularFirestoreCollection,
   QueryFn,
 } from '@angular/fire/compat/firestore';
+import firebase from 'firebase/compat/app';
 import { map, Observable } from 'rxjs';
 
 type CollectionPredicate<T> = string | AngularFirestoreCollection<T>;
 
-export const newDate = new Date().toLocaleString();
-
 @Injectable({
   providedIn: 'root',
 })
-export class DbService {
+export class FirestoreService {
   constructor(private afs: AngularFirestore) {}
+
+  // firebase server timestamp
+  get timestamp() {
+    return firebase.firestore.FieldValue.serverTimestamp();
+  }
 
   collection$(path: string, query?: QueryFn): Observable<any[]> {
     return this.afs
@@ -47,14 +51,19 @@ export class DbService {
    *
    * Creates or updates data on a collection or document.
    **/
-  updateAt(path: string, data: Object): Promise<any> {
+  createOrUpdate(path: string, data: Object): Promise<any> {
     const segments = path.split('/').filter((v) => v);
+    debugger;
     if (segments.length % 2) {
       // Odd is always a collection
-      return this.afs.collection(path).add(data);
+      return this.afs
+        .collection(path)
+        .add({ ...data, createdAt: this.timestamp, updatedAt: this.timestamp });
     } else {
       // Even is always document
-      return this.afs.doc(path).set(data, { merge: true });
+      return this.afs
+        .doc(path)
+        .set({ ...data, updatedAt: this.timestamp }, { merge: true });
     }
   }
 

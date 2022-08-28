@@ -1,47 +1,48 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 
 import { Collection } from '../enums/collections.enums';
 import { Category } from '../models/category.model';
-import { DbService, newDate } from './db.service';
+import { FirestoreService } from './firestore.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CategoryService {
-  constructor(private afs: AngularFirestore, private dbService: DbService) {}
+  constructor(private firestoreService: FirestoreService) {}
 
   getAll(): Observable<Category[]> {
-    return this.dbService.collection$(Collection.CATEGORIES, (query) =>
+    return this.firestoreService.collection$(Collection.CATEGORIES, (query) =>
       query.orderBy('createdAt')
     );
   }
 
   getByUid(uid: string) {
-    return this.afs.doc<Category>(`${Collection.CATEGORIES}/${uid}`);
+    return this.firestoreService.doc$(`${Collection.CATEGORIES}/${uid}`);
   }
 
   getByName(description: string) {
-    return this.dbService.colWithId$<Category>(Collection.CATEGORIES, (ref) =>
-      ref.where('description', '==', description)
+    return this.firestoreService.colWithId$<Category>(
+      Collection.CATEGORIES,
+      (ref) => ref.where('description', '==', description)
     );
   }
 
-  add(data: any) {
-    return this.afs
-      .collection(Collection.CATEGORIES)
-      .add({ ...data, createdAt: newDate, updatedAt: newDate });
+  create(data: Category) {
+    return this.firestoreService.createOrUpdate(
+      `${Collection.CATEGORIES}`,
+      data
+    );
   }
 
-  update(uid: string, data: any) {
-    return this.getByUid(uid).set(
-      { ...data, updatedAt: newDate },
-      { merge: true }
+  update(uid: string, data: Category) {
+    return this.firestoreService.createOrUpdate(
+      `${Collection.CATEGORIES}/${uid}`,
+      data
     );
   }
 
   delete(uid: string) {
-    return this.getByUid(uid).delete();
+    return this.firestoreService.delete(`${Collection.CATEGORIES}/${uid}`);
   }
 }

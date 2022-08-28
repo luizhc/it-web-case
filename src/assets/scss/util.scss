@@ -1,0 +1,22 @@
+.disabled {
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+.hidden {
+  &-xs {
+    @media (max-width: 575px) {
+      display: none;
+    }
+  }
+  &-sm {
+    @media (max-width: 767px) {
+      display: none;
+    }
+  }
+  &-md {
+    @media (max-width: 1079px) {
+      display: none;
+    }
+  }
+}

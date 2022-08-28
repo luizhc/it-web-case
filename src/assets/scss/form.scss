@@ -32,3 +32,12 @@ select.ng-dirty.ng-valid {
   -moz-box-shadow: var(--border-focus-invalid);
   box-shadow: var(--border-focus-invalid);
 }
+
+input::placeholder,
+textarea::placeholder {
+  font-style: italic;
+}
+
+// .form-group {
+//   margin-top: 0.5rem;
+// }

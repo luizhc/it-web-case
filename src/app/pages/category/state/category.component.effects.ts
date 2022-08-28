@@ -54,7 +54,7 @@ export class CategoryEffects {
         ofType(addCategory),
         tap(({ data }) =>
           this.categoryService
-            .add(data)
+            .create(data)
             .then(() => {
               this.messageService.alertWithIcon(
                 Messages.CATEGORY_ADDED.TITLE,

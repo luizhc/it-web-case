@@ -1,0 +1,14 @@
+.card-title {
+  text-align: center;
+  color: var(--dark-color);
+
+  img {
+    max-width: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .card-body {
+    margin-top: 4rem;
+  }
+}

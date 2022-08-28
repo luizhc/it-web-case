@@ -1,5 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import {
   combineLatest,
   debounceTime,
@@ -56,7 +61,7 @@ export class CategoryComponent implements OnInit {
         Validators.compose([Validators.required, Validators.maxLength(50)]),
       ],
     });
-    setTimeout(() => this.filterInput.nativeElement.focus(), 1000);
+    setTimeout(() => this.filterInput?.nativeElement.focus(), 1000);
   }
 
   private setup() {
@@ -90,7 +95,12 @@ export class CategoryComponent implements OnInit {
                 category?.description
                   ?.toUpperCase()
                   .includes(filter?.toUpperCase()) ||
-                category?.createdAt
+                this.utilService
+                  .castTimestampFirebaseToDate(category?.createdAt)
+                  ?.toUpperCase()
+                  .includes(filter?.toUpperCase()) ||
+                this.utilService
+                  .castTimestampFirebaseToDate(category?.updatedAt)
                   ?.toUpperCase()
                   .includes(filter?.toUpperCase())
             )
@@ -115,6 +125,7 @@ export class CategoryComponent implements OnInit {
     this.action = 'Atualizar';
     this.openModal.nativeElement.click();
     setTimeout(() => this.descriptionInput.nativeElement.focus(), 1000);
+    this.formCategory.addControl('uid', new FormControl(category.uid));
     this.formCategory.patchValue(category);
   }
 
