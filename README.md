@@ -6,14 +6,14 @@
 
 ## ⚡ Tecnologias utilizadas
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;🚀 [Angular](http://angular.io) framework para construção e desenvolvimento da aplicação (versão 14.1.0)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;🤖 [TypeScript](https://www.typescriptlang.org) como linguagem (orientada a objetos, compilada para [JavaScript](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)) (versão 4.7.2)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;🎨 [Bootstrap](https://getbootstrap.com) para estilização dos componentes (inputs, grids, etc) (versão 5.2.0)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;📢 [Sweet Alert](https://sweetalert2.github.io/) para mensagens de sucesso, alertas, erros, etc (versão 11.4.29)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;💥 [NgRx](https://ngrx.io) para programação reativa e gerenciamento de estado (versão 14.2.0)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;🎯 [NgRx Store Local Storage](https://www.npmjs.com/package/ngrx-store-localstorage) para sincronização automática entre o armazenamento NgRx e o armazenamento local do navegador (versão 14.0.0)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;🔥 [Firebase](https://ngrx.io) da Google, para armazenamento em dados em banco de dados noSQL realtime (versão 9.9.3)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;💼 [Vercel](https://vercel.com/) para o CI/CD do projeto a cada commit e hospedagem automática da aplicação.
+&nbsp;&nbsp;🚀 [Angular](http://angular.io) framework para construção e desenvolvimento da aplicação (versão 14.1.0) <br>
+&nbsp;&nbsp;🤖 [TypeScript](https://www.typescriptlang.org) como linguagem (orientada a objetos, compilada para [JavaScript](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)) (versão 4.7.2) <br>
+&nbsp;&nbsp;🎨 [Bootstrap](https://getbootstrap.com) para estilização dos componentes (inputs, grids, etc) (versão 5.2.0) <br>
+&nbsp;&nbsp;📢 [Sweet Alert](https://sweetalert2.github.io/) para mensagens de sucesso, alertas, erros, etc (versão 11.4.29) <br>
+&nbsp;&nbsp;💥 [NgRx](https://ngrx.io) para programação reativa e gerenciamento de estado (versão 14.2.0) <br>
+&nbsp;&nbsp;🎯 [NgRx Store Local Storage](https://www.npmjs.com/package/ngrx-store-localstorage) para sincronização automática entre o armazenamento NgRx e o armazenamento local do navegador (versão 14.0.0) <br>
+&nbsp;&nbsp;🔥 [Firebase](https://ngrx.io) da Google, para armazenamento em dados em banco de dados noSQL realtime (versão 9.9.3) <br>
+&nbsp;&nbsp;💼 [Vercel](https://vercel.com/) para o CI/CD do projeto a cada commit e hospedagem automática da aplicação.
 
 ## 🪁 Arquitetura do projeto
 
@@ -86,9 +86,9 @@ Se você gostou da ideia e deseja ver esse projeto crescer, bora contribuir? É 
 
 Para obter mais ajuda sobre o Angular e o uso da sua CLI você pode usar o comando `ng help` ou consultar a página [Visão geral da CLI e referência de comandos](https://angular.io/cli). Caso tenha outras dúvidas, você pode acessar os links disponíveis nas palavras desta documentação ou consultar a documentação oficial.
 
-## 💖 Pontos de Melhorias
+## 💖 Pontos de melhorias
 
-- **Escalabilidade:** possuir uma biblioteca de componentes próprios, para que possibilite o reuso e facilite a manutenção dos mesmos. Publicação das dependência em ambiente [Nexus](https://www.sonatype.com/products/.nexus-repository), facilitando o gerencimento. Ter times diferentes, um atuando focado na biblioteca e outro time focado em atuar no desenvolvimento da aplicação.
+- **Escalabilidade:** possuir uma biblioteca de componentes próprios, para que possibilite o reuso e facilite a manutenção dos mesmos. Publicação das dependência em ambiente [Nexus](https://www.sonatype.com/products/.nexus-repository), facilitando o gerencimento. Ter times diferentes, um atuando focado na biblioteca e outro time focado em atuar no desenvolvimento da aplicação. Realização dos testes unitários e integrados garantindo a qualidade do produto, fazer uso da ferramenta [SonarQube](https://www.sonarqube.org/) para cobertura e qualidade do código.
 - **Resiliência:** se adaptar as situações com a prática, aprender com erros e não comete-los novamente, confiar em si mesmo, encontrar base de apoio, sempre estar aberto a aprender e principalmente disseminar conhecimento com demais colegas.
 - **Alta disponibilidade:** clusterização dos ambientes, melhorando ainda mais em casos de alta demanda / concorrência. Possuir verificação nas dependência do projeto para garantir que nenhuma biblioteca esteja desatualizada ou até mesmo obsoleta e venha quebrar o projeto.
 - **Observabilidade – Monitoração e Log:** Detectar e investigar problemas e possíveis gargalos com uso de ferramentas com IA para tal finalidade, um bom exemplo seria o uso do [Dynatrace](https://www.dynatrace.com/)
