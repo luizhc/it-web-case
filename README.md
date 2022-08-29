@@ -18,10 +18,10 @@
 ## 🪁 Arquitetura do projeto
 
 A aplicação foi densenvolvimento com Angular, pois usa o conecito de SPA (Single Page Application) que propicia para o usuário a experiência de estar fazendo um uso de uma única tela, uma vez que não existe carregamento entre as telas, o conteúdo é gerado dinamicamente.
-Também foi utilizado os serviços do Firebase para gerenciamento do banco de dados da Cloud Firestore, devido o seu grande poder de escabalidade e por ser um banco realtime, ou seja, os dados são atualizados em tempo real os dados na tela do usuário.
-Foi adodado uso da biblioteca Bootstrap que possui um set pré-definido com todo um guia de estilos, entregando componentes estilizados e responsivos.
-Foi feito uso dd NgRx, biblioteca poderosa para gerencimento de estado e reatividade em aplicações Angular, ela é inspirada no Redux muito utilizado para o React.
-E para o CI/CD foi utilizado o ambiente Cloud da Vercel, que faz toda integração do projeto após o commit e entrega da aplicação atualizada.
+Também foi utilizado os serviços do Firebase para gerenciamento do banco de dados da Cloud Firestore, devido o seu grande poder de escabalidade e por ser um banco realtime, ou seja, os dados são atualizados em tempo real na tela do usuário.
+Foi adotado o uso da biblioteca Bootstrap que possui um set pré-definido com guia de estilos, entregando componentes estilizados e responsivos.
+Foi feito uso do NgRx, biblioteca poderosa para gerencimento de estado e reatividade em aplicações Angular, ela é inspirada no Redux muito utilizado para o React.
+E para o CI/CD foi utilizado o ambiente Cloud da Vercel, que faz toda integração do projeto, após cada commit é realizado automaticamente a entrega da aplicação.
 
 ## 🌎 Bora ver a aplicação rodando na prática?
 
@@ -38,13 +38,13 @@ Para utilização da aplicação em ambiente desenvolvimento, é necessário os 
 
 ## 🔧 Clone / configuração
 
-- Realize o clone do projeto em seu computador com o comando:
+Realize o clone do projeto em seu computador com o comando:
 
 ```bash
   git clone https://github.com/luizhc/it-web-case.git
 ```
 
-- Atráves do terminal, vá até o diretório onde clonou o projeto e rode o comando para instalação das depêndencias:
+Atráves do terminal, vá até o diretório onde clonou o projeto e rode o comando para instalação das depêndencias:
 
 ```bash
   npm install
@@ -52,13 +52,13 @@ Para utilização da aplicação em ambiente desenvolvimento, é necessário os 
 
 ## 🔌 Execução / acesso
 
-- Para executar o projeto execute o comando:
+Para executar o projeto execute o comando:
 
 ```bash
   ng serve
 ```
 
-- O projeto será aberto automaticamente no seu browser em `http://localhost:4200`.
+O projeto será aberto automaticamente no seu browser em `http://localhost:4200`.
 
 ## 🐞 Encontrou um bug?
 
@@ -88,10 +88,12 @@ Para obter mais ajuda sobre o Angular e o uso da sua CLI você pode usar o coman
 
 ## 💖 Pontos de melhorias
 
-- **Escalabilidade:** possuir uma biblioteca de componentes próprios, para que possibilite o reuso e facilite a manutenção dos mesmos. Publicação das dependência em ambiente [Nexus](https://www.sonatype.com/products/.nexus-repository), facilitando o gerencimento. Ter times diferentes, um atuando focado na biblioteca e outro time focado em atuar no desenvolvimento da aplicação. Realização dos testes unitários e integrados garantindo a qualidade do produto, fazer uso da ferramenta [SonarQube](https://www.sonarqube.org/) para cobertura e qualidade do código.
-- **Resiliência:** se adaptar as situações com a prática, aprender com erros e não comete-los novamente, confiar em si mesmo, encontrar base de apoio, sempre estar aberto a aprender e principalmente disseminar conhecimento com demais colegas.
-- **Alta disponibilidade:** clusterização dos ambientes, melhorando ainda mais em casos de alta demanda / concorrência. Possuir verificação nas dependência do projeto para garantir que nenhuma biblioteca esteja desatualizada ou até mesmo obsoleta e venha quebrar o projeto.
-- **Observabilidade – Monitoração e Log:** Detectar e investigar problemas e possíveis gargalos com uso de ferramentas com IA para tal finalidade, um bom exemplo seria o uso do [Dynatrace](https://www.dynatrace.com/)
-- **Segurança:** Fazer utlização de token para acesso aos serviços. Fazer uso de proxy interno na aplicação para omitir o endereço das requests back-end. Utlizar duplo fator de autenticação, aumentando o nível de segurança entre usuário e aplicação.
-- **Acessibilidade:** Fazer uso de tags que facilitem os leitores de tela, ajudando assim pessoas com deficiência. Seguir o padrão [WCAG](https://pt.wikipedia.org/wiki/Diretrizes_de_Acessibilidade_para_o_Conte%C3%BAdo_da_Web).
+Prezando na melhoria continua e melhores práticas, segue pontos fundamentais pro projeto:
+
+- **Escalabilidade:** Possuir uma biblioteca de componentes próprios, para que possibilite o reuso e facilite a manutenção dos mesmos. Publicação das dependência em ambiente [Nexus](https://www.sonatype.com/products/.nexus-repository), facilitando o gerencimento. Ter times diferentes, atuando focado na biblioteca e outro(s) focado(s) no desenvolvimento da aplicação. Realização dos testes unitários e integrados garantindo a qualidade do produto, fazeendo uso da ferramenta [SonarQube](https://www.sonarqube.org/) para cobertura e qualidade do código.
+- **Resiliência:** Se adaptar as situações com a prática, aprender com erros e não comete-los novamente, confiar em si mesmo, encontrar base de apoio, sempre estar aberto a aprender e principalmente disseminar conhecimento.
+- **Alta disponibilidade:** Clusterização dos ambientes, melhorando ainda mais em casos de alta demanda / concorrência. Possuir varredura nas dependência do projeto para garantir que nenhuma biblioteca esteja desatualizada ou até mesmo obsoleta e venha impactar o projeto.
+- **Observabilidade – Monitoração e Log:** detecção e diagnísticos de problemas e possíveis gargalos com uso de ferramentas com IA para tal finalidade, um bom exemplo seria o uso do [Dynatrace](https://www.dynatrace.com/)
+- **Segurança:** Fazer utlização de token para acesso aos serviços. Fazer uso de proxy interno na aplicação para omitir o endereço de dominio das requests back-end. Utlizar duplo fator de autenticação, aumentando o nível de segurança entre usuário e aplicação.
+- **Acessibilidade:** Fazer uso de tags que facilitem os leitores de tela, ajudando assim o acesso de pessoas com algum tipo de deficiência. Seguir o padrão [WCAG](https://pt.wikipedia.org/wiki/Diretrizes_de_Acessibilidade_para_o_Conte%C3%BAdo_da_Web).
 - **Esteira CI/CD:** Foi feito uso da [Vercel](https://vercel.com/) para todo CI/CD do projeto, a cada commit é realizado o processo de build e deploy, tudo de forma sincronizada. Para melhorar ainda poderia ter um processo de build para cada ambiente (development, staging, production, etc).
