@@ -4,6 +4,8 @@
 
 **It Web Case** é uma aplicação front-end web Angular responsiva, que foi desenvolvida inspirada na API [it-api-case](https://github.com/adelbs/it-api-case), porém com um back-end próprio utilizando os serviços do Firebase da Google. Esta aplicação tem como objetivo gerenciar lançamentos de gastos pessoais e suas categorias.
 
+![Screenshot_3](https://user-images.githubusercontent.com/22556132/187213611-f25ae3d4-677d-4e69-bd42-30c30bf4279a.png)
+
 ## ⚡ Tecnologias utilizadas
 
 &nbsp;&nbsp;🚀 [Angular](http://angular.io) framework para construção e desenvolvimento da aplicação (versão 14.1.0) <br>
