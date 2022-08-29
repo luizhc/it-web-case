@@ -48,7 +48,14 @@ export class ExpenseDetailEffects {
               this.globalFacade.saveAnalytic(AnalyticsEnum.EXPENSES_CREATED);
               this.store.dispatch(addExpenseSuccess());
             })
-            .catch(() => this.store.dispatch(addExpenseFailure()))
+            .catch(() => {
+              this.store.dispatch(addExpenseFailure());
+              this.messageService.alertWithIcon(
+                Messages.ERROR.TITLE,
+                Messages.ERROR.TEXT,
+                Messages.ERROR.ICON as SweetAlertIcon
+              );
+            })
         )
       ),
     { dispatch: false }
@@ -70,7 +77,14 @@ export class ExpenseDetailEffects {
               this.store.dispatch(updateExpenseSuccess());
               this.globalFacade.saveAnalytic(AnalyticsEnum.EXPENSES_EDITED);
             })
-            .catch(() => this.store.dispatch(updateExpenseFailure()))
+            .catch(() => {
+              this.store.dispatch(updateExpenseFailure());
+              this.messageService.alertWithIcon(
+                Messages.ERROR.TITLE,
+                Messages.ERROR.TEXT,
+                Messages.ERROR.ICON as SweetAlertIcon
+              );
+            })
         )
       ),
     { dispatch: false }

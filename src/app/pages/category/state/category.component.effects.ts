@@ -46,7 +46,14 @@ export class CategoryEffects {
           this.categoryService.get().subscribe({
             next: (categories: Category[]) =>
               this.store.dispatch(getCategoriesSuccess({ categories })),
-            error: () => this.store.dispatch(getCategoriesFailure()),
+            error: () => {
+              this.store.dispatch(getCategoriesFailure());
+              this.messageService.alertWithIcon(
+                Messages.ERROR.TITLE,
+                Messages.ERROR.TEXT,
+                Messages.ERROR.ICON as SweetAlertIcon
+              );
+            },
           });
         })
       ),
@@ -72,7 +79,14 @@ export class CategoryEffects {
               this.globalFacade.saveAnalytic(AnalyticsEnum.CATEGORIES_CREATED);
               this.store.dispatch(addCategorySuccess());
             })
-            .catch(() => this.store.dispatch(addCategoryFailure()))
+            .catch(() => {
+              this.store.dispatch(addCategoryFailure());
+              this.messageService.alertWithIcon(
+                Messages.ERROR.TITLE,
+                Messages.ERROR.TEXT,
+                Messages.ERROR.ICON as SweetAlertIcon
+              );
+            })
         )
       ),
     { dispatch: false }
@@ -94,7 +108,14 @@ export class CategoryEffects {
               this.store.dispatch(updateCategorySuccess());
               this.globalFacade.saveAnalytic(AnalyticsEnum.CATEGORIES_EDITED);
             })
-            .catch(() => this.store.dispatch(updateCategoryFailure()))
+            .catch(() => {
+              this.store.dispatch(updateCategoryFailure());
+              this.messageService.alertWithIcon(
+                Messages.ERROR.TITLE,
+                Messages.ERROR.TEXT,
+                Messages.ERROR.ICON as SweetAlertIcon
+              );
+            })
         )
       ),
     { dispatch: false }
@@ -130,9 +151,14 @@ export class CategoryEffects {
                           AnalyticsEnum.CATEGORIES_DELETED
                         );
                       })
-                      .catch(() =>
-                        this.store.dispatch(deleteCategoryFailure())
-                      );
+                      .catch(() => {
+                        this.store.dispatch(deleteCategoryFailure());
+                        this.messageService.alertWithIcon(
+                          Messages.ERROR.TITLE,
+                          Messages.ERROR.TEXT,
+                          Messages.ERROR.ICON as SweetAlertIcon
+                        );
+                      });
                   }
                 });
             }

@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { tap } from 'rxjs';
+import { SweetAlertIcon } from 'sweetalert2';
 
+import { Messages } from '../../../../constants/messages.constants';
 import { AnalyticsEnum } from '../../../../enums/analytics.enum';
 import { Expense } from '../../../../models/expense.model';
 import { ExpenseService } from '../../../../services/expense.service';
@@ -36,7 +38,14 @@ export class ExpenseListEffects {
           this.expenseService.get().subscribe({
             next: (expenses: Expense[]) =>
               this.store.dispatch(getExpensesSuccess({ expenses })),
-            error: () => this.store.dispatch(getExpensesFailure()),
+            error: () => {
+              this.store.dispatch(getExpensesFailure());
+              this.messageService.alertWithIcon(
+                Messages.ERROR.TITLE,
+                Messages.ERROR.TEXT,
+                Messages.ERROR.ICON as SweetAlertIcon
+              );
+            },
           });
         })
       ),
@@ -60,7 +69,14 @@ export class ExpenseListEffects {
                       AnalyticsEnum.EXPENSES_DELETED
                     );
                   })
-                  .catch(() => this.store.dispatch(deleteExpenseFailure()));
+                  .catch(() => {
+                    this.store.dispatch(deleteExpenseFailure());
+                    this.messageService.alertWithIcon(
+                      Messages.ERROR.TITLE,
+                      Messages.ERROR.TEXT,
+                      Messages.ERROR.ICON as SweetAlertIcon
+                    );
+                  });
               }
             });
         })
