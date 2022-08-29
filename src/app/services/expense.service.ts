@@ -21,6 +21,12 @@ export class ExpenseService {
       );
   }
 
+  getByCategory(categoryUid: string): Observable<Expense[]> {
+    return this.firestoreService.collection$(Collection.EXPENSES, (query) =>
+      query.where('category', '==', categoryUid)
+    );
+  }
+
   create(data: Expense) {
     return this.firestoreService.createOrUpdate(Collection.EXPENSES, data);
   }

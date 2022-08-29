@@ -8,6 +8,7 @@ import { Category } from './../../../models/category.model';
 import { Messages } from '../../../constants/messages.constants';
 import { AnalyticsEnum } from '../../../enums/analytics.enum';
 import { CategoryService } from '../../../services/category.service';
+import { ExpenseService } from '../../../services/expense.service';
 import { MessageService } from '../../../services/message.service';
 import { GlobalFacade } from '../../../state/global.facade';
 import {
@@ -32,6 +33,7 @@ export class CategoryEffects {
     private actions$: Actions,
     private store: Store<CategoryState>,
     private categoryService: CategoryService,
+    private expenseService: ExpenseService,
     private messageService: MessageService,
     private globalFacade: GlobalFacade
   ) {}
@@ -103,23 +105,38 @@ export class CategoryEffects {
       this.actions$.pipe(
         ofType(deleteCategory),
         tap(({ category }) => {
-          this.messageService
-            .confirmBoxDelete(
-              `Categoria <strong>${category.description}</strong>`
-            )
-            .then((res) => {
-              if (res) {
-                this.categoryService
-                  .delete(category.uid)
-                  .then(() => {
-                    this.store.dispatch(deleteCategorySuccess());
-                    this.globalFacade.saveAnalytic(
-                      AnalyticsEnum.CATEGORIES_DELETED
-                    );
-                  })
-                  .catch(() => this.store.dispatch(deleteCategoryFailure()));
-              }
-            });
+          this.expenseService.getByCategory(category.uid).subscribe((res) => {
+            if (res.length > 0) {
+              this.messageService.alertWithIcon(
+                Messages.CATEGORY_VINCULATED.TITLE,
+                Messages.CATEGORY_VINCULATED.TEXT.replace(
+                  '{text}',
+                  `<strong>${category.description}</strong>`
+                ),
+                Messages.CATEGORY_VINCULATED.ICON as SweetAlertIcon
+              );
+            } else {
+              this.messageService
+                .confirmBoxDelete(
+                  `Categoria <strong>${category.description}</strong>`
+                )
+                .then((res) => {
+                  if (res) {
+                    this.categoryService
+                      .delete(category.uid)
+                      .then(() => {
+                        this.store.dispatch(deleteCategorySuccess());
+                        this.globalFacade.saveAnalytic(
+                          AnalyticsEnum.CATEGORIES_DELETED
+                        );
+                      })
+                      .catch(() =>
+                        this.store.dispatch(deleteCategoryFailure())
+                      );
+                  }
+                });
+            }
+          });
         })
       ),
     { dispatch: false }

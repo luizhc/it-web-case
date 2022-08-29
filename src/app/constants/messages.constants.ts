@@ -19,6 +19,11 @@ export const Messages = {
     TEXT: 'Houve algum problema. <br> Por favor, tente novamente.',
     ICON: 'error',
   },
+  CATEGORY_VINCULATED: {
+    TITLE: 'Ops!',
+    TEXT: 'Não foi possível excluir, pois categoria {text} possui vínculo com lançamento.',
+    ICON: 'warning',
+  },
   REQUIRED_FIELDS: {
     TITLE: 'Ops!',
     TEXT: 'Existem campos obrigatórios não preenchidos ou incorretos.',
