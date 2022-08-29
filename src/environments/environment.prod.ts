@@ -1,12 +1,12 @@
 export const environment = {
   production: true,
   firebaseConfig: {
-    apiKey: 'AIzaSyCrbveNgGFvVLo7IfiOS8yv5WcELqWUy78',
-    authDomain: 'it-web-case-dev.firebaseapp.com',
-    projectId: 'it-web-case-dev',
-    storageBucket: 'it-web-case-dev.appspot.com',
-    messagingSenderId: '204858272920',
-    appId: '1:204858272920:web:867fe561a2624ba67a34ed',
-    measurementId: 'G-N9WVVTHPFM',
+    apiKey: 'AIzaSyB-gV8PLK_0zH0wIyA5PRcfQClSYPvbD7k',
+    authDomain: 'it-web-case.firebaseapp.com',
+    projectId: 'it-web-case',
+    storageBucket: 'it-web-case.appspot.com',
+    messagingSenderId: '233835360456',
+    appId: '1:233835360456:web:a6802956c6adf14fc5b5fd',
+    measurementId: 'G-YJFX6YJ58X',
   },
 };
