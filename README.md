@@ -68,14 +68,14 @@ Bora participar da melhoria continua desse projeto, para reportar um bug <a href
 
 Se você gostou da ideia e deseja ver esse projeto crescer, bora contribuir? É só seguir os passos abaixo:
 
-- 1. Realize o fork e clone do projeto
-- 2. Atualize sua branch baseada na `main` com `git checkout main` e `git pull`
-- 3. Crie sua branch baseado no tipo de contribuição:
-  - Feature: `git checkout -b feature/nome_feature `
-  - Fix: `git checkout -b fix/nome_fix `
-- 3. Faça o commit das mudanças `git commit -m 'seu comentário aqui'`
-- 4. Faça um `push` para a sua branch: `git push`
-- 5. Abra um <a href="https://github.com/luizhc/it-web-case/pulls">pull request</a>
+1. Realize o fork e clone do projeto
+2. Atualize sua branch baseada na `main` com `git checkout main` e `git pull`
+3. Crie sua branch baseado no tipo de contribuição:
+   &nbsp;Feature: `git checkout -b feature/nome_feature `
+   &nbsp;Fix: `git checkout -b fix/nome_fix `
+4. Faça o commit das mudanças `git commit -m 'seu comentário aqui'`
+5. Faça um `push` para a sua branch: `git push`
+6. Abra um <a href="https://github.com/luizhc/it-web-case/pulls">pull request</a>
 
 ## 💡 Comandos úteis
 
@@ -88,7 +88,7 @@ Para obter mais ajuda sobre o Angular e o uso da sua CLI você pode usar o coman
 
 ## 💖 Pontos de melhorias
 
-Prezando na melhoria continua e melhores práticas, segue pontos fundamentais pro projeto:
+Prezando na melhoria continua e melhores práticas, segue pontos de melhoria que podem ser fundamentais pra evolução do projeto:
 
 - **Escalabilidade:** Possuir uma biblioteca de componentes próprios, para que possibilite o reuso e facilite a manutenção dos mesmos. Publicação das dependência em ambiente [Nexus](https://www.sonatype.com/products/.nexus-repository), facilitando o gerencimento. Ter times diferentes, atuando focado na biblioteca e outro(s) focado(s) no desenvolvimento da aplicação. Realização dos testes unitários e integrados garantindo a qualidade do produto, fazeendo uso da ferramenta [SonarQube](https://www.sonarqube.org/) para cobertura e qualidade do código.
 - **Resiliência:** Se adaptar as situações com a prática, aprender com erros e não comete-los novamente, confiar em si mesmo, encontrar base de apoio, sempre estar aberto a aprender e principalmente disseminar conhecimento.
