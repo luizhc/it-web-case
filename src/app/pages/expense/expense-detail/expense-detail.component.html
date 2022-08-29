@@ -1,7 +1,7 @@
 <div class="container col-11 p-5">
   <div class="shadow-lg p-3 mb-5 bg-white rounded">
     <button
-      (click)="utilService.navigateByUrl('lancamentos')"
+      (click)="back()"
       type="button"
       class="btn btn-secondary position-absolute"
       data-toggle="tooltip"
@@ -16,15 +16,17 @@
         <img width="40" src="assets/icons/money-bag.png" alt="Lançamento" />
         {{ action }} lançamento
       </h1>
-      <p class="text-center mb-4">Aqui você gerencia seu lançamento.</p>
-      <pre>{{ formExpense.value | json }}</pre>
+      <p class="text-center mb-4">
+        Aqui você gerencia seus lançamentos de gastos pessoais.
+      </p>
+      <!-- <pre>{{ formExpense.value | json }}</pre> -->
       <form [formGroup]="formExpense" (submit)="save()">
         <div class="row">
           <div class="col-sm-12 col-md-6 col-lg-3">
             <div class="form-group">
               <label>Categoria</label>
               <select
-                class="form-control"
+                class="form-select"
                 formControlName="category"
                 [compareWith]="utilService.compareWithDescription"
               >

@@ -8,5 +8,5 @@ import { Component, OnInit } from '@angular/core';
 export class NoResultsFoundComponent implements OnInit {
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit() {}
 }

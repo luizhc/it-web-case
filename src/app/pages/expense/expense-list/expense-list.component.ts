@@ -12,8 +12,10 @@ import {
   takeUntil,
 } from 'rxjs';
 
+import { AnalyticsEnum } from '../../../enums/analytics.enum';
 import { Expense } from '../../../models/expense.model';
 import { UtilService } from '../../../services/util.service';
+import { GlobalFacade } from '../../../state/global.facade';
 import { ExpenseListFacade } from './state/expense-list.component.facade';
 
 @Component({
@@ -31,7 +33,8 @@ export class ExpenseListComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private expenseListFacade: ExpenseListFacade,
-    public utilService: UtilService
+    public utilService: UtilService,
+    private globalFacade: GlobalFacade
   ) {}
 
   ngOnInit() {
@@ -103,15 +106,28 @@ export class ExpenseListComponent implements OnInit {
   navigateToCategories(event: Event) {
     event.preventDefault();
     this.utilService.navigateByUrl('categorias');
+    this.globalFacade.saveAnalytic(AnalyticsEnum.CATEGORIES_INIT_FROM_EXPENSES);
+  }
+
+  new() {
+    this.utilService.navigateByUrl('lancamentos/detalhe');
+    this.globalFacade.saveAnalytic(AnalyticsEnum.EXPENSES_NEW);
   }
 
   edit(expense: Expense) {
     this.expenseListFacade.expenseSelected(expense);
     this.utilService.navigateByUrl('lancamentos/detalhe');
+    this.globalFacade.saveAnalytic(AnalyticsEnum.EXPENSES_EDIT);
   }
 
   delete(expense: Expense) {
     this.expenseListFacade.deleteExpense(expense);
+    this.globalFacade.saveAnalytic(AnalyticsEnum.EXPENSES_DELETE);
+  }
+
+  back() {
+    this.utilService.navigateByUrl('/');
+    this.globalFacade.saveAnalytic(AnalyticsEnum.EXPENSES_BACK);
   }
 
   ngOnDestroy() {

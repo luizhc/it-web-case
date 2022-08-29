@@ -3,9 +3,11 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { tap } from 'rxjs';
 
+import { AnalyticsEnum } from '../../../../enums/analytics.enum';
 import { Expense } from '../../../../models/expense.model';
 import { ExpenseService } from '../../../../services/expense.service';
 import { MessageService } from '../../../../services/message.service';
+import { GlobalFacade } from '../../../../state/global.facade';
 import {
   deleteExpense,
   deleteExpenseFailure,
@@ -22,7 +24,8 @@ export class ExpenseListEffects {
     private actions$: Actions,
     private store: Store<ExpenseListState>,
     private expenseService: ExpenseService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private globalFacade: GlobalFacade
   ) {}
 
   getExpenses$ = createEffect(
@@ -51,7 +54,12 @@ export class ExpenseListEffects {
               if (res) {
                 this.expenseService
                   .delete(expense.uid)
-                  .then(() => this.store.dispatch(deleteExpenseSuccess()))
+                  .then(() => {
+                    this.store.dispatch(deleteExpenseSuccess());
+                    this.globalFacade.saveAnalytic(
+                      AnalyticsEnum.EXPENSES_DELETED
+                    );
+                  })
                   .catch(() => this.store.dispatch(deleteExpenseFailure()));
               }
             });

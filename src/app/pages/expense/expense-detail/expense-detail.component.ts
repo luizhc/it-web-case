@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { filter, Observable, Subject, takeUntil } from 'rxjs';
 
+import { AnalyticsEnum } from '../../../enums/analytics.enum';
 import { Category } from '../../../models/category.model';
 import { UtilService } from '../../../services/util.service';
+import { GlobalFacade } from '../../../state/global.facade';
 import { CategoryFacade } from '../../category/state/category.component.facade';
 import { ExpenseListFacade } from '../expense-list/state/expense-list.component.facade';
 import { ExpenseDetailFacade } from './state/expense-detail.component.facade';
@@ -25,7 +27,8 @@ export class ExpenseDetailComponent implements OnInit {
     private categoryFacade: CategoryFacade,
     private expenseListFacade: ExpenseListFacade,
     private expenseDetailFacade: ExpenseDetailFacade,
-    public utilService: UtilService
+    public utilService: UtilService,
+    private globalFacade: GlobalFacade
   ) {}
 
   ngOnInit() {
@@ -69,6 +72,7 @@ export class ExpenseDetailComponent implements OnInit {
 
   save() {
     if (this.formExpense.valid) {
+      this.globalFacade.saveAnalytic(AnalyticsEnum.EXPENSES_SAVE);
       const uid = this.formExpense.get('uid')?.value;
       this.formExpense.patchValue({
         category: this.formExpense.get('category').value.uid,
@@ -83,7 +87,13 @@ export class ExpenseDetailComponent implements OnInit {
     } else {
       this.utilService.markAllFieldsAsDirty(this.formExpense);
       this.disabledSave = true;
+      this.globalFacade.saveAnalytic(AnalyticsEnum.EXPENSES_REQUIRED_FIELDS);
     }
+  }
+
+  back() {
+    this.utilService.navigateByUrl('lancamentos');
+    this.globalFacade.saveAnalytic(AnalyticsEnum.EXPENSES_BACK);
   }
 
   ngOnDestroy() {

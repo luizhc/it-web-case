@@ -6,8 +6,10 @@ import { SweetAlertIcon } from 'sweetalert2';
 import { Category } from './../../../models/category.model';
 
 import { Messages } from '../../../constants/messages.constants';
+import { AnalyticsEnum } from '../../../enums/analytics.enum';
 import { CategoryService } from '../../../services/category.service';
 import { MessageService } from '../../../services/message.service';
+import { GlobalFacade } from '../../../state/global.facade';
 import {
   addCategory,
   addCategoryFailure,
@@ -30,7 +32,8 @@ export class CategoryEffects {
     private actions$: Actions,
     private store: Store<CategoryState>,
     private categoryService: CategoryService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private globalFacade: GlobalFacade
   ) {}
 
   getCategories$ = createEffect(
@@ -64,6 +67,7 @@ export class CategoryEffects {
                 ),
                 Messages.INSERT.ICON as SweetAlertIcon
               );
+              this.globalFacade.saveAnalytic(AnalyticsEnum.CATEGORIES_CREATED);
               this.store.dispatch(addCategorySuccess());
             })
             .catch(() => this.store.dispatch(addCategoryFailure()))
@@ -86,6 +90,7 @@ export class CategoryEffects {
                 Messages.UPDATE.ICON as SweetAlertIcon
               );
               this.store.dispatch(updateCategorySuccess());
+              this.globalFacade.saveAnalytic(AnalyticsEnum.CATEGORIES_EDITED);
             })
             .catch(() => this.store.dispatch(updateCategoryFailure()))
         )
@@ -106,7 +111,12 @@ export class CategoryEffects {
               if (res) {
                 this.categoryService
                   .delete(category.uid)
-                  .then(() => this.store.dispatch(deleteCategorySuccess()))
+                  .then(() => {
+                    this.store.dispatch(deleteCategorySuccess());
+                    this.globalFacade.saveAnalytic(
+                      AnalyticsEnum.CATEGORIES_DELETED
+                    );
+                  })
                   .catch(() => this.store.dispatch(deleteCategoryFailure()));
               }
             });

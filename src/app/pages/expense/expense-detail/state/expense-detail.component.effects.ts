@@ -2,11 +2,13 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { tap } from 'rxjs';
-import { SweetAlertIcon } from 'sweetalert2';
 
+import { SweetAlertIcon } from 'sweetalert2';
 import { Messages } from '../../../../constants/messages.constants';
+import { AnalyticsEnum } from '../../../../enums/analytics.enum';
 import { ExpenseService } from '../../../../services/expense.service';
 import { MessageService } from '../../../../services/message.service';
+import { GlobalFacade } from '../../../../state/global.facade';
 import {
   addExpense,
   addExpenseFailure,
@@ -23,7 +25,8 @@ export class ExpenseDetailEffects {
     private actions$: Actions,
     private store: Store<ExpenseDetailState>,
     private expenseService: ExpenseService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private globalFacade: GlobalFacade
   ) {}
 
   addExpense$ = createEffect(
@@ -42,6 +45,7 @@ export class ExpenseDetailEffects {
                 ),
                 Messages.INSERT.ICON as SweetAlertIcon
               );
+              this.globalFacade.saveAnalytic(AnalyticsEnum.EXPENSES_CREATED);
               this.store.dispatch(addExpenseSuccess());
             })
             .catch(() => this.store.dispatch(addExpenseFailure()))
@@ -64,6 +68,7 @@ export class ExpenseDetailEffects {
                 Messages.UPDATE.ICON as SweetAlertIcon
               );
               this.store.dispatch(updateExpenseSuccess());
+              this.globalFacade.saveAnalytic(AnalyticsEnum.EXPENSES_EDITED);
             })
             .catch(() => this.store.dispatch(updateExpenseFailure()))
         )

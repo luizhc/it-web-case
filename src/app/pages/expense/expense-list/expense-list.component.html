@@ -1,7 +1,7 @@
 <div class="container col-xs-12 col-sm-12 col-md-12 col-xl-10">
   <div class="shadow-lg p-4 mb-5 bg-white rounded">
     <button
-      (click)="utilService.navigateByUrl('/')"
+      (click)="back()"
       type="button"
       class="btn btn-secondary position-absolute"
       data-toggle="tooltip"
@@ -59,11 +59,7 @@
           <div
             class="col-xs-12 col-sm-12 col-md-4 col-xl-6 d-flex justify-content-end"
           >
-            <button
-              type="button"
-              class="btn btn-primary"
-              (click)="utilService.navigateByUrl('lancamentos/detalhe')"
-            >
+            <button type="button" class="btn btn-primary" (click)="new()">
               <img src="assets/icons/plus.svg" alt="Salvar" />
               Novo
             </button>
@@ -82,8 +78,8 @@
                 <th width="10%">
                   <a href (click)="navigateToCategories($event)">Categoria</a>
                 </th>
-                <th width="25%">Nome</th>
-                <th width="10%">Valor</th>
+                <th width="20%">Nome</th>
+                <th width="15%">Valor</th>
                 <th width="20%" class="hidden-xs hidden-sm hidden-md">
                   Data Criação
                 </th>

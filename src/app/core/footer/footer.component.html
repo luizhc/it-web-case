@@ -1,13 +1,25 @@
 <footer>
-  Desenvolvido por Luiz Henrique &#169;
+  Desenvolvido por Luiz Henrique &#169; {{ visits }} {{ actions }}
   <div class="footer-icons">
-    <a href="https://github.com/luizhc" target="_blank">
+    <a
+      (click)="goTo('github')"
+      href="https://github.com/luizhc"
+      target="_blank"
+    >
       <img src="assets/icons/github.svg" alt="GitHub" />
     </a>
-    <a href="https://www.linkedin.com/in/luizhc" target="_blank">
+    <a
+      (click)="goTo('linkedin')"
+      href="https://www.linkedin.com/in/luizhc"
+      target="_blank"
+    >
       <img src="assets/icons/linkedin.svg" alt="LinkedIn" />
     </a>
-    <a href="https://www.instagram.com/luizhcorreia" target="_blank">
+    <a
+      (click)="goTo('instagram')"
+      href="https://www.instagram.com/luizhcorreia"
+      target="_blank"
+    >
       <img src="assets/icons/instagram.svg" alt="Instagram" />
     </a>
   </div>

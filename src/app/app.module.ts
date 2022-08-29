@@ -17,6 +17,9 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { PagesModule } from './pages/pages.module';
 import { SharedModule } from './shared/shared.module';
+import { GlobalEffects } from './state/global.effects';
+import { GlobalFacade } from './state/global.facade';
+import { globalFeatureKey, globalReducer } from './state/global.reducer';
 
 registerLocaleData(localePt);
 
@@ -58,8 +61,10 @@ const metaReducers: MetaReducer[] = [localStorageSyncReducer];
     }),
     EffectsModule.forRoot(),
     StoreRouterConnectingModule.forRoot(),
+    StoreModule.forFeature(globalFeatureKey, globalReducer),
+    EffectsModule.forFeature([GlobalEffects]),
   ],
-  providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }],
+  providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }, GlobalFacade],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

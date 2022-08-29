@@ -28,10 +28,7 @@ export class CategoryService {
   }
 
   create(data: Category) {
-    return this.firestoreService.createOrUpdate(
-      `${Collection.CATEGORIES}`,
-      data
-    );
+    return this.firestoreService.createOrUpdate(Collection.CATEGORIES, data);
   }
 
   update(uid: string, data: Category) {

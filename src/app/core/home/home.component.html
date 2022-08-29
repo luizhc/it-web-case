@@ -7,16 +7,10 @@
         tudo em um só lugar...
       </h1>
       <div class="text-center">
-        <button
-          (click)="utilService.navigateByUrl('categorias')"
-          class="home-btn"
-        >
+        <button (click)="goToCategories()" class="home-btn">
           ACESSAR CATEGORIAS
         </button>
-        <button
-          (click)="utilService.navigateByUrl('lancamentos')"
-          class="home-btn"
-        >
+        <button (click)="goToExpenses()" class="home-btn">
           ACESSAR LANÇAMENTOS
         </button>
       </div>

@@ -57,12 +57,11 @@ export class FirestoreService {
    **/
   createOrUpdate(path: string, data: Object): Promise<any> {
     const segments = path.split('/').filter((v) => v);
-    debugger;
     if (segments.length % 2) {
       // Odd is always a collection
       return this.afs
         .collection(path)
-        .add({ ...data, createdAt: this.timestamp, updatedAt: this.timestamp });
+        .add({ ...data, createdAt: this.timestamp });
     } else {
       // Even is always document
       return this.afs

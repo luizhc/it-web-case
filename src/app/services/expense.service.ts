@@ -22,7 +22,7 @@ export class ExpenseService {
   }
 
   create(data: Expense) {
-    return this.firestoreService.createOrUpdate(`${Collection.EXPENSES}`, data);
+    return this.firestoreService.createOrUpdate(Collection.EXPENSES, data);
   }
 
   update(uid: string, data: Expense) {
