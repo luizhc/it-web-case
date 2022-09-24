@@ -23,7 +23,7 @@ A aplicação foi densenvolvimento com Angular, pois usa o conecito de SPA (Sing
 Também foi utilizado os serviços do Firebase para gerenciamento do banco de dados da Cloud Firestore, devido o seu grande poder de escabalidade e por ser um banco realtime, ou seja, os dados são atualizados em tempo real na tela do usuário.
 Foi adotado o uso da biblioteca Bootstrap que possui um set pré-definido com guia de estilos, entregando componentes estilizados e responsivos.
 Foi feito uso do NgRx, biblioteca poderosa para gerencimento de estado e reatividade em aplicações Angular, ela é inspirada no Redux muito utilizado para o React.
-E para o CI/CD foi utilizado o ambiente Cloud da Vercel, que faz toda integração do projeto, após cada commit é realizado automaticamente a entrega da aplicação.
+E para o CI/CD foi utilizado o ambiente Cloud da Vercel, que faz toda integração do projeto, após cada commit é realizado automaticamente a entrega da aplicação atualizada.
 
 ## 🌎 Bora ver a aplicação rodando na prática?
 
@@ -40,7 +40,7 @@ Para utilização da aplicação em ambiente desenvolvimento, é necessário os 
 
 ## 🔧 Clone / configuração
 
-Realize o clone do projeto em seu computador com o comando:
+Realize o clone do projeto em seu computador, com o comando:
 
 ```bash
   git clone https://github.com/luizhc/it-web-case.git
@@ -54,7 +54,7 @@ Atráves do terminal, vá até o diretório onde clonou o projeto e rode o coman
 
 ## 🔌 Execução / acesso
 
-Para executar o projeto execute o comando:
+Para executar o projeto, execute o comando:
 
 ```bash
   ng serve
@@ -73,11 +73,11 @@ Se você gostou da ideia e deseja ver esse projeto crescer, bora contribuir? É 
 1. Realize o fork e clone do projeto
 2. Atualize sua branch baseada na `main` com `git checkout main` e `git pull`
 3. Crie sua branch baseado no tipo de contribuição:
-   &nbsp;Feature: `git checkout -b feature/nome_feature `
-   &nbsp;Fix: `git checkout -b fix/nome_fix `
-4. Faça o commit das mudanças `git commit -m 'seu comentário aqui'`
-5. Faça um `push` para a sua branch: `git push`
-6. Abra um <a href="https://github.com/luizhc/it-web-case/pulls">pull request</a>
+   <br>Novos desenvolvimentos: `git checkout -b feature/nome_feature `
+   <br>Correções de bugs: `git checkout -b fix/nome_fix `
+4. Faça o commit das mudanças `git commit -m 'seu lindo comentário aqui'`
+5. Faça um `git push` para a sua branch
+6. Abra um <a href="https://github.com/luizhc/it-web-case/pulls">pull request</a> e acompanhe
 
 ## 💡 Comandos úteis
 
@@ -93,7 +93,7 @@ Para obter mais ajuda sobre o Angular e o uso da sua CLI você pode usar o coman
 Prezando na melhoria continua e melhores práticas, segue pontos de melhoria que podem ser fundamentais pra evolução do projeto:
 
 - **Escalabilidade:** Possuir uma biblioteca de componentes próprios, para que possibilite o reuso e facilite a manutenção dos mesmos. Publicação das dependência em ambiente [Nexus](https://www.sonatype.com/products/.nexus-repository), facilitando o gerencimento. Ter times diferentes, atuando focado na biblioteca e outro(s) focado(s) no desenvolvimento da aplicação. Realização dos testes unitários e integrados garantindo a qualidade do produto, fazeendo uso da ferramenta [SonarQube](https://www.sonarqube.org/) para cobertura e qualidade do código.
-- **Resiliência:** Se adaptar as situações com a prática, aprender com erros e não comete-los novamente, confiar em si mesmo, encontrar base de apoio, sempre estar aberto a aprender e principalmente disseminar conhecimento.
+- **Resiliência:** Se adaptar as situações com a prática, trabalhar para que a aplicação permaneça sempre disponível, realizar deploy em horários estratégicos para que usuários não sejam impactados, possuir abordagem de funcionamento offline garantindo que mesmo o usuário em local sem cobertura de internet a aplicação continue disponível, um bom exemplo pra isso seria o uso de [PWA](https://developer.mozilla.org/pt-BR/docs/Web/Progressive_web_apps) na aplicação, permitindo salvar em cache os dados já carregados, dentre tantos outros benefícios.
 - **Alta disponibilidade:** Clusterização dos ambientes, melhorando ainda mais em casos de alta demanda / concorrência. Possuir varredura nas dependência do projeto para garantir que nenhuma biblioteca esteja desatualizada ou até mesmo obsoleta e venha impactar o projeto.
 - **Observabilidade – Monitoração e Log:** detecção e diagnísticos de problemas e possíveis gargalos com uso de ferramentas com IA para tal finalidade, um bom exemplo seria o uso do [Dynatrace](https://www.dynatrace.com/)
 - **Segurança:** Fazer utlização de token para acesso aos serviços. Fazer uso de proxy interno na aplicação para omitir o endereço de dominio das requests back-end. Utlizar duplo fator de autenticação, aumentando o nível de segurança entre usuário e aplicação.
